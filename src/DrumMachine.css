@@ -22,10 +22,13 @@ body {
 
 #drum-machine {
   align-items: center;
+  background: linear-gradient(to right, rgb(120, 55, 120)50%, rgb(80, 34, 80)100%);
+  border: gray 5px solid;
   display: flex;
   flex-direction: row;
   height: 50%;
   justify-content: center;
+  padding: 2em;
   width: auto;
 }
 
@@ -40,27 +43,97 @@ body {
 
 #display {
   background-color: white;
+  border: 1px solid black;
   margin-top: 10px;
   padding: 10px;
   text-align: center;
-  width: 70%;
+  width: 80%;
+}
+
+.power-switch {
+  display: inline-block;
+  height: 38px;
+  position: relative;
+  width: 160px;
+}
+
+.power-switch input {
+  height: 0;
+  opacity: 0;
+  width: 0;
+}
+
+.power-slide {
+  background-color: #CCC;
+  bottom: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  -webkit-transition: .4s;
+}
+
+.power-slide.round {
+  border-radius: 34px;
+}
+
+.power-slide:before {
+  background-color: white;
+  bottom: 4px;
+  content: "";
+  height: 30px;
+  left: 4px;
+  position: absolute;
+  width: 30px;
+}
+
+.power-slide.round:before {
+  border-radius: 50%;
+}
+
+input:checked+.power-slide {
+  background-color: rgb(0, 0, 0);
+}
+
+input:focus+.power-slide {
+  box-shadow: 0 0 1px rgb(0, 0, 0);
+}
+
+input:checked+.power-slide:before {
+  transform: translateX(121px);
+  -ms-transform: translateX(121px);
+  -webkit-transform: translateX(121px);
 }
 
 /*Grid*/
 .pad-container {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 25px;
   grid-template-columns: auto auto auto;
-  height: 100%;
+  height: auto;
+  margin: 2em;
 }
 
 /*Grid Pieces*/
 .drum-pad {
   background-color: gray;
   border-radius: 100%;
-  box-shadow: 2px 2px 5px purple;
-  color: white;
+  box-shadow: -8px 8px 13px black;
+  color: black;
   cursor: pointer;
-  height: 125px;
-  width: 125px;
+  height: 120px;
+  transition: box-shadow .2s ease, transform .2s ease;
+  width: 120px;
+}
+
+.drum-pad:active {
+  box-shadow: -2px 2px 5px;
+  transform: translateY(4px);
+}
+
+.active {
+  box-shadow: -2px 2px 5px;
+  transform: translateY(4px);
 }
