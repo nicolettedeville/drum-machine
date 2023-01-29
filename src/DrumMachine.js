@@ -69,16 +69,28 @@ const drumSounds = [
 ];
 
 const SoundBoardKey = ({ play, sound: { key, src, keyCode, id } }) => {
+  const [isActive, setActive] = useState(false);
   const keyDownHandler = (e) => {
     if (e.keyCode === keyCode) {
       play(key, id);
+      setActive(!isActive);
+    }
+  };
+  const keyUpHandler = (e) => {
+    if (e.keyCode === keyCode) {
+      setActive(!isActive);
     }
   };
   useEffect(() => {
     document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keyup', keyUpHandler);
   });
   return (
-    <button id={id} className="drum-pad" onClick={() => play(key, id)}>
+    <button
+      id={id}
+      className={`drum-pad${isActive ? ' active' : ''}`}
+      onClick={() => play(key, id)}
+    >
       <audio src={src} id={key} className="clip" />
       {key}
     </button>
@@ -110,6 +122,19 @@ const DrumMachine = () => {
       </div>
       <div className="info-container">
         <Display soundName={soundName} />
+        <label for="volumeRange" className="volume-control-label">
+          Volume Level
+        </label>
+        <input
+          type="range"
+          name="volumeRange"
+          className="volume-control"
+        ></input>
+        <label>Power On/Off</label>
+        <label className="power-switch">
+          <input type="checkbox" />
+          <span className="power-slide round" />
+        </label>
       </div>
     </div>
   );
