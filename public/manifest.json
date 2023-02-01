@@ -1,16 +1,16 @@
 {
-  "short_name": "Drum Machine",
-  "name": "Create React Drum Machine",
+  "background_color": "rgb(0, 0, 0)",
   "description": "Creates a sound machine",
   "developer": {
     "name": "Nicolette DeVille",
     "url": "https://www.nicolettedeville.com"
   },
   "default_locale": "en",
-  "homepage_url": "https://www.nicolettedeville.com",
   "display": "standalone",
+  "homepage_url": "https://www.nicolettedeville.com",
+  "name": "Create React Drum Machine",
+  "short_name": "Drum Machine",
   "theme_color": "rgb(80, 34, 80)",
-  "background_color": "#000000",
   "version": "0.8",
   "version_name": "0.8 alpha-build"
 }
