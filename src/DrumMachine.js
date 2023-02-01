@@ -114,7 +114,7 @@ const VolumeControl = ({ volume, handleVolumeChange }) => (
     max="1"
     min="0"
     onChange={handleVolumeChange}
-    step="0.01"
+    step=".01"
     type="range"
     value={volume}
   />

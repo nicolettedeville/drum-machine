@@ -22,8 +22,7 @@ body {
 
 #drum-machine {
   align-items: center;
-  background: linear-gradient(to right, rgb(120, 55, 120)50%, rgb(80, 34, 80)100%);
-  border: gray 5px solid;
+  background: radial-gradient(circle, rgb(120, 55, 120)60%, rgb(80, 34, 80), rgb(0, 0, 0)90%);
   display: flex;
   flex-direction: row;
   height: 50%;
@@ -129,7 +128,8 @@ input:checked+.power-slide:before {
   grid-gap: 25px;
   grid-template-columns: auto auto auto;
   height: auto;
-  margin: 2em;
+  margin-left: 3em;
+  padding: .5em;
 }
 
 /*Grid Pieces*/
