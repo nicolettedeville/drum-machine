@@ -97,15 +97,40 @@ const SoundBoardKey = ({ play, sound: { key, src, keyCode, id } }) => {
   );
 };
 
-const SoundBoard = ({ play }) => {
-  return drumSounds.map((sound) => <SoundBoardKey play={play} sound={sound} />);
-};
+const Soundboard = ({ power, play }) => (
+  <div className="soundboard">
+    {power
+      ? drumSounds.map((sound) => <SoundBoardKey play={play} sound={sound} />)
+      : drumSounds.map((sound) => (
+          <SoundBoardKey play={play} sound={{ ...sound, src: '#' }} />
+        ))}
+  </div>
+);
+
+const Display = ({ soundName }) => <h2 id="display">{soundName}</h2>;
+
+const VolumeControl = ({ volume, handleVolumeChange }) => (
+  <input
+    max="1"
+    min="0"
+    onChange={handleVolumeChange}
+    step="0.01"
+    type="range"
+    value={volume}
+  />
+);
 
 const DrumMachine = () => {
-  const [soundName, setSoundName] = useState('');
+  const [soundName, setSoundName] = useState('Heater Kit');
+  const [volume, setVolume] = useState('.5');
+  const [power, setPower] = useState(true);
 
-  const Display = () => {
-    return <h2 id="display">{soundName}</h2>;
+  const powerChange = () => {
+    setPower(!power);
+  };
+
+  const handleVolumeChange = (e) => {
+    setVolume(e.target.value);
   };
 
   const play = (key, sound) => {
@@ -115,24 +140,33 @@ const DrumMachine = () => {
     audioObj.play();
   };
 
+  const setSoundVolume = () => {
+    const audios = drumSounds.map((sound) =>
+      document.getElementById(sound.key)
+    );
+    audios.forEach((audio) => {
+      if (audio) {
+        audio.volume = volume;
+      }
+    });
+  };
+
   return (
     <div id="drum-machine">
-      <div className="pad-container">
-        <SoundBoard play={play} />
-      </div>
+      {setSoundVolume()}
+      <Soundboard play={play} power={power} />
       <div className="info-container">
         <Display soundName={soundName} />
-        <label for="volumeRange" className="volume-control-label">
-          Volume Level
-        </label>
-        <input
-          type="range"
-          name="volumeRange"
-          className="volume-control"
-        ></input>
-        <label>Power On/Off</label>
+        <h3 className="volume-level">
+          Volume Level:{Math.ceil(volume * 100)}%
+        </h3>
+        <VolumeControl
+          handleVolumeChange={handleVolumeChange}
+          volume={volume}
+        />
         <label className="power-switch">
-          <input type="checkbox" />
+          <h3>Power {power ? 'true' : 'false'}</h3>
+          <input type="checkbox" power={power} onChange={powerChange} />
           <span className="power-slide round" />
         </label>
       </div>
