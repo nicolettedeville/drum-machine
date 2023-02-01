@@ -165,7 +165,7 @@ const DrumMachine = () => {
           volume={volume}
         />
         <label className="power-switch">
-          <h3>Power {power ? 'true' : 'false'}</h3>
+          <h3>Power {power ? 'on' : 'off'}</h3>
           <input type="checkbox" power={power} onChange={powerChange} />
           <span className="power-slide round" />
         </label>
