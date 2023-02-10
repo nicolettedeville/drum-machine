@@ -88,7 +88,7 @@ const SoundBoardKey = ({ play, sound: { key, src, keyCode, id } }) => {
   return (
     <button
       id={id}
-      className={`drum-pad${isActive ? ' active' : ''}`}
+      className={`drum-pad ${isActive ? ' active' : ''}`}
       onClick={() => play(key, id)}
     >
       <audio src={src} id={key} className="clip" />
